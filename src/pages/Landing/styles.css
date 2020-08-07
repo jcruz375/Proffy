@@ -16,7 +16,7 @@
 }
 
 .hero-img{
-    width: 100%;
+    width: 100vw;
 }
 
 .logo-container{
@@ -120,6 +120,7 @@
 
 
     .hero-img{
+        width: 100%;
         grid-area: hero;
         justify-self: end;
     }

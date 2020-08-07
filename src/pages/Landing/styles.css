@@ -38,7 +38,7 @@
 }
 
 .buttons-container a{
-    width: 30rem;
+    width: 26rem;
     height: 10.4rem;
     border-radius: 0.8rem;
     font: 700 2.0rem Archivo;
@@ -54,6 +54,7 @@
 }
 
 .buttons-container a:first-child{
+    margin-left: 5rem;
     margin-right: 1.6rem;
 }
 

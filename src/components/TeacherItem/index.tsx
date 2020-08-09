@@ -3,35 +3,54 @@ import React from 'react';
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
 
 import './styles.css';
+import api from '../../services/api';
 
-function TeacherItem(){
-    return(
+export interface Teacher {
+    id: number;
+    avatar: string;
+    bio: string;
+    cost: number;
+    name: string;
+    subject: string;
+    whatsapp: string
+}
+
+interface TeacherItemProps {
+    teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+
+    function createConnection(){
+        api.post('connections', {
+            user_id: teacher.id
+        });
+    };
+
+    return (
         <article className="teacher-item">
-        <header>
-            <img src="https://avatars1.githubusercontent.com/u/61796057?s=460&u=c5b9d620804a45d26c9fc3559ff093eee1097d8e&v=4" 
-                alt="João Cruz"
-            />
-            <div>
-                <strong>João Cruz</strong>
-                <span>Física</span>
-            </div>
-        </header>
-        <p>
-            Formado pela universidade de Harvard. 
-            <br/><br/>
-            Responsável pelo projeto do foguete Alumni que levou o ser humano para outra galaxia
-        </p>
-        <footer>
-            <p>
-                Preço/hora 
-                <strong>150$</strong>
-            </p>
-            <button type="button">
-                <img src={whatsappIcon} alt="Entrar em contato"/>
-                Entrar em contato
-            </button>
-        </footer>
-    </article>
+            <header>
+                <img
+                    src={teacher.avatar}
+                    alt={teacher.name}
+                />
+                <div>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject} </span>
+                </div>
+            </header>
+            <p>{teacher.bio}</p>
+            <footer>
+                <p>
+                    Preço/hora
+                <strong>{teacher.cost}</strong>
+                </p>
+                <a target="_blank" onClick={createConnection} href={`https://wa.me/${teacher.whatsapp}`}>
+                    <img src={whatsappIcon} alt="Entrar em contato" />
+                    Entrar em contato
+                </a>
+            </footer>
+        </article>
     );
 };
 
